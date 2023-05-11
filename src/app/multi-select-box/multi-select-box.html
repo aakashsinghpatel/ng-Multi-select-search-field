@@ -1,0 +1,70 @@
+<!-- 1. Imp with 2 araay -->
+<h1 class="heading">This is normal muti select input</h1>
+<div class="selected-field-box" (click)="toggleSelectionBox()">
+  <span
+    *ngFor="let sField of selectedFields; let i= index;"
+    class="selected-fiels"
+  >
+    <span class="sField-value">{{ sField }}</span>
+    <span class="sField-cancle" (click)="unselectData($event,i)"> X </span>
+  </span>
+</div>
+
+<div *ngIf="showSelection" class="fiels-container">
+  <span
+    (click)="selectField(i)"
+    *ngFor="let fields of allFields; let i = index"
+    class="fields"
+  >
+    {{ fields }}</span
+  >
+</div>
+
+<!-- 2. Imp with on e array of oject -->
+<h1 class="heading">This is muti select input with disabled option</h1>
+<div class="selected-field-box" (click)="toggleSelectionBoxObj()">
+  <ng-container *ngFor="let sField of allFieldsObj; let i= index;">
+    <span *ngIf="sField.selected" class="selected-fiels">
+      <span class="sField-value">{{ sField['data'] }}</span>
+      <span class="sField-cancle" (click)="unselectDataObj($event,i)"> X </span>
+    </span>
+  </ng-container>
+</div>
+
+<div *ngIf="showSelectionObj" class="fiels-container">
+  <span
+    (click)="selectFieldObj(i)"
+    *ngFor="let fields of allFieldsObj; let i = index"
+    class="fields"
+    [ngClass]="fields.selected? 'disabled': ''"
+  >
+    {{ fields['data'] }}</span
+  >
+</div>
+
+<!-- 3. Multi select serch box -->
+<h1 class="heading">This is muti select search</h1>
+<div class="serch-input-field-wrapper">
+  <input type="text" (input)="getSearchList()" [(ngModel)]="serchInputField" />
+</div>
+<div *ngIf="selectedSerchList.length" class="selected-field-box serch-selected">
+  <ng-container *ngFor="let sField of selectedSerchList; let i= index;">
+    <span *ngIf="sField.selected" class="selected-fiels">
+      <span class="sField-value">{{ sField['data'] }}</span>
+      <span class="sField-cancle" (click)="unselectDataObj1($event,sField)">
+        X
+      </span>
+    </span>
+  </ng-container>
+</div>
+
+<div *ngIf="SerchedFilteredList.length" class="fiels-container">
+  <span
+    (click)="selectFieldObj1(field)"
+    *ngFor="let field of SerchedFilteredList; let i = index"
+    class="fields"
+    [ngClass]="field.selected? 'disabled': ''"
+  >
+    {{ field['data'] }}</span
+  >
+</div>
